@@ -6,6 +6,11 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.32.02 (May 12, 2016)
+-----------------------
+- Changed module addon folder to be Atlas_WarlordsofDraenor.
+  Old folder will need to be removed manually.
+
 v1.32.01 (May 11, 2016)
 -----------------------
 - Moved map db info from core Atlas to this module for better maintenance
