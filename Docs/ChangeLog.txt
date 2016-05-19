@@ -6,6 +6,10 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.32.04 (May 19, 2016)
+-----------------------
+- Fixed the wrong DB file linking in TOC due to name correction (again...)
+
 v1.32.03 (May 19, 2016)
 -----------------------
 - Fixed the wrong DB file linking in TOC due to name correction
