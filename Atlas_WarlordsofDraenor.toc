@@ -1,9 +1,9 @@
 ﻿## Interface: 60200
-## Title: Atlas |r|cFF0099FF[Worldlords of Draenor]|r
+## Title: Atlas |r|cFF0099FF[Warlords of Draenor]|r
 ## Title-zhTW: |r|cFF0099FF[地圖]|rAtlas 德拉諾之霸
-## Notes: Worldlords of Draenor Dungeon Maps
+## Notes: Warlords of Draenor Dungeon Maps
 ## Notes-zhTW: 德拉諾之霸副本地圖模組
-## Version: 1.32.04
+## Version: 1.32.05
 ## Author: arith, Dynaletik, dubcat
 ## X-Date: May 19, 2016
 ## X-Email: atlas.addon@gmail.com
