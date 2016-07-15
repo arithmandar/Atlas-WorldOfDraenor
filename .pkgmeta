@@ -8,3 +8,9 @@ enable-nolib-creation: no
 
 ignore:
     - PNG
+    - Images\HellfireA.psd
+    - Images\HellfireB.psd
+    - Images\HellfireC.psd
+    - Images\HellfireD.psd
+    - Images\HellfireE.psd
+    - Images\HellfireF.psd
