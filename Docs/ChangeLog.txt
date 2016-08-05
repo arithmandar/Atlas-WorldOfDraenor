@@ -6,6 +6,10 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.33.02 (Aug. 06, 2016)
+------------------------
+- Update coordinate of Iron Reaver in Hellfire
+
 v1.33.01 (Jul. 21, 2016)
 ------------------------
 - Updated Hellfire Citadel mapE where Mannoroth is located.

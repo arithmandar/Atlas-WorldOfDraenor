@@ -83,7 +83,7 @@ local myDB = {
 	};
 	HellfireA = {
 		{ 1, 1426, 276, 233}; -- Hellfire Assault
-		{ 2, 1425, 155, 255}; -- Iron Reaver
+		{ 2, 1425, 150, 249}; -- Iron Reaver
 		{ "A", 10001, 369, 227}; 
 		{ "B", 10002, 118, 257};
 	};
