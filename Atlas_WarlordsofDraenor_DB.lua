@@ -112,7 +112,7 @@ local myDB = {
 	};
 	HellfireF = { 
 		{ 13, 1438, 297, 262 }; -- Archimonde
-		{ "D", 10001, 121, 261}; 
+		{ "D", 10001, 113, 261}; 
 	};
 	HighmaulA = {
 		{ 1, 1128, 347, 430 }; -- Kargath Bladefist

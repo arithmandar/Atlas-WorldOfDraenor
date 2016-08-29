@@ -29,7 +29,7 @@
 ## Notes: Warlords of Draenor Dungeon Maps
 ## Notes-zhTW: 德拉諾之霸副本地圖模組
 #@end-debug@
-## Version: 1.33.02
+## Version: 1.33.03
 ## Author: arith, Dynaletik, dubcat
 ## X-Date: @project-date-iso@
 ## X-Email: atlas.addon at gmail.com
