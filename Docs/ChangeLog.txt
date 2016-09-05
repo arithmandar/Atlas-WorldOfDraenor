@@ -6,6 +6,10 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.34.00 (Sep. XX, 2016)
+------------------------
+- Move main map data from core Atlas into individual module's DB
+
 v1.33.03 (Aug. 29, 2016)
 ------------------------
 - Minor fix: revise Hellfire mapF's node coordinates
