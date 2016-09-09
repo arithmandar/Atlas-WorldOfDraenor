@@ -6,7 +6,7 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
-v1.34.00 (Sep. XX, 2016)
+v1.34.00 (Sep. 09, 2016)
 ------------------------
 - Move main map data from core Atlas into individual module's DB
 
