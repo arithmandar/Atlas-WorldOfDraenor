@@ -6,6 +6,10 @@ Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
 = Change Log =
 ==============
 
+v1.35.00 (Oct. 27, 2016)
+------------------------
+- Toc update to support WoW 7.1.0
+
 v1.34.00 (Sep. 09, 2016)
 ------------------------
 - Move main map data from core Atlas into individual module's DB
