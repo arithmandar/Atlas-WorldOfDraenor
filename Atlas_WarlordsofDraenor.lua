@@ -2,7 +2,7 @@
 --[[
 
 	Atlas, a World of Warcraft instance map browser
-	Copyright 2011 ~ 2016 - Arith Hsu, Atlas Team <atlas.addon@gmail.com>
+	Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 	This file is part of Atlas.
 
@@ -70,6 +70,7 @@ local myMaps = {
 		WorldMapID = "988";
 		JournalInstanceID = "457";
 		Module = "Atlas_WarlordsofDraenor";
+		NextMap = "BlackrockFoundryB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B-C) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Gruul", 1161)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 1161 };
@@ -102,6 +103,7 @@ local myMaps = {
 		WorldMapID = "988";
 		JournalInstanceID = "457";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "BlackrockFoundryA";
 		{ BLUE.." C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 4) "..Atlas_GetBossName("Flamebender Ka'graz", 1123), 1123 };
 		{ WHIT..INDENT..Atlas_GetBossName("Aknor Steelbringer", 1123, 2), 1123 };
@@ -143,6 +145,7 @@ local myMaps = {
 		WorldMapID = "1008";
 		JournalInstanceID = "556";
 		Module = "Atlas_WarlordsofDraenor";
+		NextMap = "TheEverbloomB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Witherbark", 1214), 1214 };
@@ -163,6 +166,7 @@ local myMaps = {
 		WorldMapID = "1008";
 		JournalInstanceID = "556";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "TheEverbloomA";
 		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10001 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Yalnu", 1210), 1210 };
 	};
@@ -196,6 +200,7 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		NextMap = "HellfireB";
 		{ BLUE.." A) "..ALC["Entrance"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Hellfire Assault", 1426), 1426 };			-- 1
@@ -214,6 +219,8 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HellfireA";
+		NextMap = "HellfireC";
 		{ BLUE.." B/C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 3) "..Atlas_GetBossName("Gorefiend", 1372), 1372 };				-- 3
 		{ WHIT.." 4) "..Atlas_GetBossName("Kilrogg Deadeye", 1396), 1396 };			-- 4
@@ -233,6 +240,8 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HellfireB";
+		NextMap = "HellfireD";
 		{ BLUE.." C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 6) "..Atlas_GetBossName("Kormrok", 1392), 1392 };				-- 6
 	};
@@ -247,6 +256,8 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HellfireC";
+		NextMap = "HellfireE";
 		{ BLUE.." B/C) "..ALC["Connection"], 10001 };
 		{ WHIT.." 7) "..Atlas_GetBossName("Shadow-Lord Iskar", 1433), 1433 };			-- 7
 		{ WHIT..INDENT..Atlas_GetBossName("Fel Raven", 1433, 2), 1433 };
@@ -269,6 +280,8 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HellfireD";
+		NextMap = "HellfireF";
 		{ WHIT.."12) "..Atlas_GetBossName("Mannoroth", 1395), 1395 };				-- 12
 	};
 	HellfireF = { 
@@ -282,6 +295,7 @@ local myMaps = {
 		WorldMapID = "1026";
 		JournalInstanceID = "669";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HellfireE";
 		{ BLUE.." D) "..ALC["Connection"], 10001 };
 		{ WHIT.."13) "..Atlas_GetBossName("Archimonde", 1438), 1438 };			-- 13 
 	};
@@ -296,6 +310,7 @@ local myMaps = {
 		WorldMapID = "994";
 		JournalInstanceID = "477";
 		Module = "Atlas_WarlordsofDraenor";
+		NextMap = "HighmaulB";
 		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"], 10001 };
 		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 };
 		{ WHIT.." 1) "..Atlas_GetBossName("Kargath Bladefist", 1128), 1128 };
@@ -315,6 +330,7 @@ local myMaps = {
 		WorldMapID = "994";
 		JournalInstanceID = "477";
 		Module = "Atlas_WarlordsofDraenor";
+		PrevMap = "HighmaulA";
 		{ BLUE.." B-D) "..ALC["Connection"], 10001 };
 		{ WHIT.." 5) "..Atlas_GetBossName("Twin Ogron", 1148), 1148 };
 		{ WHIT..INDENT..Atlas_GetBossName("Phemos", 1148, 2), 1148 };
