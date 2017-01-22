@@ -6,7 +6,7 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 = Change Log =
 ==============
 
-v1.37.00 (Jan. XX, 2017)
+v1.37.00 (Jan. 22, 2017)
 ------------------------
 - Added instance's achievements
 - Added dungeon level info

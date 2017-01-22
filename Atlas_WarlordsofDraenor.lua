@@ -363,7 +363,7 @@ local myMaps = {
 		{ WHIT..INDENT..Atlas_GetBossName("Corrupted PRIEST of Terokk", 1433, 4), 1433 };
 		{ WHIT..INDENT..Atlas_GetBossName("Illusionary Outcast", 1433, 5), 1433 };
 		{ WHIT.." 8) "..Atlas_GetBossName("Fel Lord Zakuun", 1391), 1391 };			-- 8
-		{ WHIT.." 9) "..Atlas_GetBossName("Xhul'horac", 1447), 1447 };			-- 9
+		{ WHIT.." 9) "..Atlas_GetBossName("Xhul'horac", 1447), 1447 };				-- 9
 		{ WHIT.."10) "..Atlas_GetBossName("Socrethar the Eternal", 1427), 1427 };		-- 10
 		{ WHIT.."11) "..Atlas_GetBossName("Tyrant Velhari", 1394), 1394 };			-- 11
 		{ "" };
