@@ -6,6 +6,10 @@ Copyright 2011 ~ 2017 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 = Change Log =
 ==============
 
+v1.39.00 (Mar. 27, 2017)
+------------------------
+- Toc update to support WoW 7.2
+
 v1.37.00 (Jan. 22, 2017)
 ------------------------
 - Added instance's achievements
