@@ -6,11 +6,11 @@ Copyright 2011 ~ 2022 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 = Change Log =
 ==============
 
-v1.49.03 (Feb. 19, 2022)
 v1.50.00 (Feb. 23, 2022)
 ------------------------
 - Toc update to support WoW 9.2.0
 
+v1.49.03 (Feb. 19, 2022)
 ------------------------
 - Update categorize by level's group criteria
 
