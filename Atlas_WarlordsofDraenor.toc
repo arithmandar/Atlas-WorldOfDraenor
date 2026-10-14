@@ -23,8 +23,8 @@
 ## Notes-zhTW: 適用於 Atlas 的德拉諾之霸副本地圖
 ## Version: @project-version@
 ## Author: arith
-## X-Date: @project-date-iso@
-## X-Credits: Dynaletik, dubcat
+## IconTexture: Interface\WorldMap\WorldMap-Icon
+## RequiredDeps: Atlas
 ## Category: Map
 ## Category-deDE: Karte
 ## Category-esES: Mapa
@@ -37,8 +37,11 @@
 ## Category-zhCN: 地图
 ## Category-zhTW: 地圖
 ## X-Category: Map
-## RequiredDeps: Atlas
-## IconTexture: Interface\WorldMap\WorldMap-Icon
+## X-Credits: Dynaletik, dubcat
+## X-Date: @project-date-iso@
+## X-Website: https://www.curseforge.com/wow/addons/atlas-worldofdraenor
+## X-Curse-Project-ID: 93258
+## X-WoWI-ID: 23851
 
 Locale\Locales.xml
 Core\Core.lua

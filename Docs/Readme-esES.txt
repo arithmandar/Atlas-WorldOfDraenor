@@ -1,31 +1,31 @@
 Atlas, un navegador de mapas de mazmorras para World of Warcraft
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, equipo de Atlas
-Copyright 2011 ~ 2015 - Arith Hsu, equipo de Atlas <atlas.addon at gmail dot com>
+Copyright 2011 ~ 2026 - Arith Hsu, equipo de Atlas <atlas.addon at gmail dot com>
 
 
 =========================
-= Acerca de este módulo =
+= Acerca de este mï¿½dulo =
 =========================
 
-Este es un módulo separado que se decidió extraer del núcleo principal de 
-Atlas empezando en la versión v1.21.0. La razón principal de esa decisión se 
-debe a que el tamaño del fichero cada vez era mas grande, mientras que la 
-mayoría de los mapas de las mazmorras no suelen actualizarse frecuentemente. Separando 
+Este es un mï¿½dulo separado que se decidiï¿½ extraer del nï¿½cleo principal de 
+Atlas empezando en la versiï¿½n v1.21.0. La razï¿½n principal de esa decisiï¿½n se 
+debe a que el tamaï¿½o del fichero cada vez era mas grande, mientras que la 
+mayorï¿½a de los mapas de las mazmorras no suelen actualizarse frecuentemente. Separando 
 los mapas de mazmorra por cada una de las expansiones de WoW, creemos que puede 
-disminuir el tamaño general de nuestro accesorio, y por otra parte evitar que 
-los usuarios tengán que bajarse todos los mapas cada vez que actualicen.
+disminuir el tamaï¿½o general de nuestro accesorio, y por otra parte evitar que 
+los usuarios tengï¿½n que bajarse todos los mapas cada vez que actualicen.
 
 
 ===============================
-= Instalación y configuración =
+= Instalaciï¿½n y configuraciï¿½n =
 ===============================
 
 Se debe tener en cuenta que esto no es un accesorio independiente y que por lo tanto 
-depende de Atlas. Y no existe ningún detalle a destacar de este módulo, sólamente 
-que proporciona las imágenes de los mapas de mazmorra para una expansión específica.
+depende de Atlas. Y no existe ningï¿½n detalle a destacar de este mï¿½dulo, sï¿½lamente 
+que proporciona las imï¿½genes de los mapas de mazmorra para una expansiï¿½n especï¿½fica.
 
-Debes tener Atlas instalado. Una vez que instales este módulo Atlas será capaz de 
+Debes tener Atlas instalado. Una vez que instales este mï¿½dulo Atlas serï¿½ capaz de 
 mostrar los mapas relativos mientras que la mazmorra correspondiente este seleccionada.
 
 
@@ -33,17 +33,17 @@ mostrar los mapas relativos mientras que la mazmorra correspondiente este selecc
 = Recursos  =
 =============
 
-La página web oficial de Atlas es:
+La pï¿½gina web oficial de Atlas es:
 http://www.atlasmod.com/
 
-Para preguntas o soporte, por favor visitar los foros (en inglés):
+Para preguntas o soporte, por favor visitar los foros (en inglï¿½s):
 http://www.atlasmod.com/phpBB3/
 
 ============
 = Contacto =
 ============
 
-Puedes contactar con el propietario del proyecto en la siguiente dirección:
+Puedes contactar con el propietario del proyecto en la siguiente direcciï¿½n:
 atlas.addon at gmail dot com
 O visitar nuestro foro y dejar un mensaje.
 
@@ -52,16 +52,16 @@ O visitar nuestro foro y dejar un mensaje.
 = Licencia =
 ============
 
-Atlas está publicado bajo GNU General Public License (GPL).
+Atlas estï¿½ publicado bajo GNU General Public License (GPL).
 Puedes encontrar el texto completo de la licencia en: gpl-v2-esES.txt
 
-También incluimos varias traducciones a diferentes idiomas del documento 
+Tambiï¿½n incluimos varias traducciones a diferentes idiomas del documento 
 de la licenia GNU GPL en nuestro accesorio para que te sea mas sencillo entenderlo en 
 tu idioma preferido.
 Puedes utilizar este accesorio totalmente gratis. Si quieres puedes hacer una 
-donación, eres bienvenido a hacerlo.
-Puedes distribuir este accesorio sólamente si no cobras a tus usuarios.
-Si vas a incluir parte del código, gráficos, o cualquier fichero de este accesorio 
+donaciï¿½n, eres bienvenido a hacerlo.
+Puedes distribuir este accesorio sï¿½lamente si no cobras a tus usuarios.
+Si vas a incluir parte del cï¿½digo, grï¿½ficos, o cualquier fichero de este accesorio 
 en tu propio producto(s), por favor escribenos un correo para informarnos, y por 
-favor también incluye los nombres de nuestros miembros del equipo en los créditos del
+favor tambiï¿½n incluye los nombres de nuestros miembros del equipo en los crï¿½ditos del
 producto.

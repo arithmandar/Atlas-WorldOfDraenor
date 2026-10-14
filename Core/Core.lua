@@ -1,4 +1,3 @@
--- $Id$
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -21,21 +20,13 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 --]]
--- ----------------------------------------------------------------------------
--- Localized Lua globals.
--- ----------------------------------------------------------------------------
--- Functions
 local _G = getfenv(0)
-local pairs = _G.pairs
--- Libraries
--- ----------------------------------------------------------------------------
--- AddOn namespace.
--- ----------------------------------------------------------------------------
-local FOLDER_NAME, private = ...
+
+local _, private = ...
 
 private.addon_name = "Atlas_WarlordsofDraenor"
 private.module_name = "WarlordsofDraenor"
 
 local LibStub = _G.LibStub
 local Atlas = LibStub("AceAddon-3.0"):GetAddon("Atlas")
-local WoD = Atlas:NewModule(private.module_name)
+local addon = Atlas:NewModule(private.module_name)
