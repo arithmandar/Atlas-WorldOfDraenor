@@ -6,11 +6,9 @@ manual-changelog:
     
 enable-nolib-creation: no
 
+# configs for WowInterface
+wowi-archive-previous: yes
+wowi-create-changelog: no
+
 ignore:
-    - PNG
-    - Images\HellfireA.psd
-    - Images\HellfireB.psd
-    - Images\HellfireC.psd
-    - Images\HellfireD.psd
-    - Images\HellfireE.psd
-    - Images\HellfireF.psd
+    - Images\PSD

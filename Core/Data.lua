@@ -1,4 +1,3 @@
--- $Id$
 --[[
 
 	Atlas, a World of Warcraft instance map browser
@@ -21,44 +20,67 @@
 	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
 --]]
------------------------------------------------------------------------
--- Upvalued Lua API.
------------------------------------------------------------------------
--- Functions
 local _G = getfenv(0)
-local pairs = _G.pairs
--- Libraries
--- ----------------------------------------------------------------------------
--- AddOn namespace.
--- ----------------------------------------------------------------------------
-local FOLDER_NAME, private = ...
+
+local _, private = ...
 local LibStub = _G.LibStub
 local BZ = Atlas_GetLocaleLibBabble("LibBabble-SubZone-3.0")
 local BF = Atlas_GetLocaleLibBabble("LibBabble-Faction-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale(private.addon_name)
 local ALC = LibStub("AceLocale-3.0"):GetLocale("Atlas")
+---@type AtlasAddon
 local Atlas = LibStub("AceAddon-3.0"):GetAddon("Atlas")
-local WoD = Atlas:GetModule(private.module_name)
+---@type AtlasDataModule
+local addon = Atlas:GetModule(private.module_name)
 
 local db = {}
-WoD.db = db
+addon.db = db
 
-local function Atlas_GetBossName(bossname, encounterID, creatureIndex)
+local constants = Atlas.constants
+local labelcolors = constants.colors.labels
+local BLUE = labelcolors.BLUE
+local GREN = labelcolors.GREN
+local GREY = labelcolors.GREY
+local LBLU = labelcolors.LBLU
+local _RED = labelcolors._RED
+local ORNG = labelcolors.ORNG
+local PINK = labelcolors.PINK
+local PURP = labelcolors.PURP
+local WHIT = labelcolors.WHIT
+local YLOW = labelcolors.YLOW
+local INDENT = labelcolors.INDENT
+
+-- local helper functions
+local function getBossName(bossname, encounterID, creatureIndex)
 	return Atlas:GetBossName(bossname, encounterID, creatureIndex, private.module_name)
 end
 
-local BLUE = "|cff6666ff"
-local GREN = "|cff66cc33"
-local GREY = "|cff999999"
-local LBLU = "|cff33cccc"
-local _RED = "|cffcc3333"
-local ORNG = "|cffcc9933"
-local PINK = "|ccfcc33cc"
-local PURP = "|cff9900ff"
-local WHIT = "|cffffffff"
-local YLOW = "|cffcccc33"
-local INDENT = "      "
+local function getCreatureName(creatureName, creatureID)
+	return Atlas:GetCreatureName(creatureName, creatureID)
+end
 
+local function getQuestTitlebyID(title, id)
+	return Atlas:GetQuestTitlebyID(title, id)
+end
+
+local function getItemTitlebyID(title, id)
+	return Atlas:GetItemTitlebyID(title, id)
+end
+
+-- local constants for easier access
+local SLASH = ALC["Slash"]
+local COLON = ALC["Colon"]
+local COMMA = ALC["Comma"]
+local L_PAREN = ALC["L-Parenthesis"]
+local R_PAREN = ALC["R-Parenthesis"]
+local ENTRANCE = ALC["Entrance"]
+local WANDERS = ALC["Wanders"]
+local UPPER = ALC["Upper"]
+local CONNECTION = ALC["Connection"]
+local RARE = ALC["Rare"]
+local RANDOM = ALC["Random"]
+
+-- ==============================================================================
 db.AtlasMaps = {
 	Auchindoun = {
 		ZoneName = { BZ["Auchindoun"] },
@@ -70,16 +92,16 @@ db.AtlasMaps = {
 		WorldMapID = 539,
 		JournalInstanceID = 547,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Vigilant Kaathar", 1185), 1185 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Soulbinder Nyami", 1186), 1186 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Azzakel", 1216), 1216 },
-		{ WHIT..INDENT..Atlas_GetBossName("Blazing Trickster", 1216, 4), 1216 },
-		{ WHIT..INDENT..Atlas_GetBossName("Cackling Pyromaniac", 1216, 2), 1216 },
-		{ WHIT..INDENT..Atlas_GetBossName("Felguard", 1216, 3), 1216 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Teron'gor", 1225), 1225 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ WHIT.." 1) "..getBossName("Vigilant Kaathar", 1185), 1185 },
+		{ WHIT.." 2) "..getBossName("Soulbinder Nyami", 1186), 1186 },
+		{ WHIT.." 3) "..getBossName("Azzakel", 1216), 1216 },
+		{ WHIT..INDENT..getBossName("Blazing Trickster", 1216, 4), 1216 },
+		{ WHIT..INDENT..getBossName("Cackling Pyromaniac", 1216, 2), 1216 },
+		{ WHIT..INDENT..getBossName("Felguard", 1216, 3), 1216 },
+		{ WHIT.." 4) "..getBossName("Teron'gor", 1225), 1225 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "...They All Fall Down", "ac=9023" },
 		{ "Demon's Souls", "ac=9551" },
 		{ "No Tag-backs!", "ac=9552" },
@@ -101,32 +123,32 @@ db.AtlasMaps = {
 		DungeonMythicID = 900,
 		Acronym = L["BRF"],
 		PlayerLimit = { 10, 20, 25, 30 },
-		WorldMapID = 596,
+		WorldMapID = 597,
 		JournalInstanceID = 457,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "BlackrockFoundryB",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B-C) "..ALC["Connection"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Gruul", 1161)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 1161 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Oregorger the Devourer", 1202, 1)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 1202 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Beastlord Darmac", 1122), 1122 },
-		{ WHIT..INDENT..Atlas_GetBossName("Cruelfang", 1122, 2), 1122 },
-		{ WHIT..INDENT..Atlas_GetBossName("Dreadwing", 1122, 3), 1122 },
-		{ WHIT..INDENT..Atlas_GetBossName("Faultline", 1122, 5), 1122 },
-		{ WHIT..INDENT..Atlas_GetBossName("Ironcrusher", 1122, 4), 1122 },
-		{ WHIT.." 6) "..Atlas_GetBossName("Operator Thogar", 1147), 1147 },
-		{ WHIT.." 7) "..Atlas_GetBossName("The Blast Furnace", 1154)..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"], 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Bellows Operator", 1154, 4), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Firecaller", 1154, 6), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Foreman Feldspar", 1154, 1), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Furnace Engineer", 1154, 3), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Heart of the Mountain", 1154, 8), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Primal Elementalist", 1154, 5), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Security Guard", 1154, 2), 1154 },
-		{ WHIT..INDENT..Atlas_GetBossName("Slag Elemental", 1154, 7), 1154 },
-		{ WHIT.." 10) "..Atlas_GetBossName("Blackhand", 959)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 959 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B-C) "..CONNECTION, 10002 },
+		{ WHIT.." 1) "..getBossName("Gruul", 1161)..L_PAREN..UPPER..R_PAREN, 1161 },
+		{ WHIT.." 2) "..getBossName("Oregorger the Devourer", 1202, 1)..L_PAREN..UPPER..R_PAREN, 1202 },
+		{ WHIT.." 3) "..getBossName("Beastlord Darmac", 1122), 1122 },
+		{ WHIT..INDENT..getBossName("Cruelfang", 1122, 2), 1122 },
+		{ WHIT..INDENT..getBossName("Dreadwing", 1122, 3), 1122 },
+		{ WHIT..INDENT..getBossName("Faultline", 1122, 5), 1122 },
+		{ WHIT..INDENT..getBossName("Ironcrusher", 1122, 4), 1122 },
+		{ WHIT.." 6) "..getBossName("Operator Thogar", 1147), 1147 },
+		{ WHIT.." 7) "..getBossName("The Blast Furnace", 1154)..L_PAREN..ALC["Lower"]..R_PAREN, 1154 },
+		{ WHIT..INDENT..getBossName("Bellows Operator", 1154, 4), 1154 },
+		{ WHIT..INDENT..getBossName("Firecaller", 1154, 6), 1154 },
+		{ WHIT..INDENT..getBossName("Foreman Feldspar", 1154, 1), 1154 },
+		{ WHIT..INDENT..getBossName("Furnace Engineer", 1154, 3), 1154 },
+		{ WHIT..INDENT..getBossName("Heart of the Mountain", 1154, 8), 1154 },
+		{ WHIT..INDENT..getBossName("Primal Elementalist", 1154, 5), 1154 },
+		{ WHIT..INDENT..getBossName("Security Guard", 1154, 2), 1154 },
+		{ WHIT..INDENT..getBossName("Slag Elemental", 1154, 7), 1154 },
+		{ WHIT.." 10) "..getBossName("Blackhand", 959)..L_PAREN..UPPER..R_PAREN, 959 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Slagworks", "ac=8989" },
 		{ "Iron Assembly", "ac=8991" },
 		{ "Blackhand's Crucible", "ac=8992" },
@@ -149,20 +171,20 @@ db.AtlasMaps = {
 		JournalInstanceID = 457,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "BlackrockFoundryA",
-		{ BLUE.." C) "..ALC["Connection"], 10001 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Flamebender Ka'graz", 1123), 1123 },
-		{ WHIT..INDENT..Atlas_GetBossName("Aknor Steelbringer", 1123, 2), 1123 },
-		{ WHIT..INDENT..Atlas_GetBossName("Cinder Wolf", 1123, 3), 1123 },
-		{ WHIT.." 5) "..Atlas_GetBossName("Hans'gar and Franzok", 1155), 1155 },
-		{ WHIT..INDENT..Atlas_GetBossName("Franzok", 1155, 1), 1155 },
-		{ WHIT..INDENT..Atlas_GetBossName("Hans'gar", 1155, 2), 1155 },
-		{ WHIT.." 8) "..Atlas_GetBossName("Kromog", 1162), 1162 },
-		{ WHIT.." 9) "..Atlas_GetBossName("The Iron Maidens", 1203), 1203 },
-		{ WHIT..INDENT..Atlas_GetBossName("Admiral Gar'an", 1203, 1), 1203 },
-		{ WHIT..INDENT..Atlas_GetBossName("Enforcer Sorka", 1203, 2), 1203 },
-		{ WHIT..INDENT..Atlas_GetBossName("Marak the Blooded", 1203, 3), 1203 },
+		{ BLUE.." C) "..CONNECTION, 10001 },
+		{ WHIT.." 4) "..getBossName("Flamebender Ka'graz", 1123), 1123 },
+		{ WHIT..INDENT..getBossName("Aknor Steelbringer", 1123, 2), 1123 },
+		{ WHIT..INDENT..getBossName("Cinder Wolf", 1123, 3), 1123 },
+		{ WHIT.." 5) "..getBossName("Hans'gar and Franzok", 1155), 1155 },
+		{ WHIT..INDENT..getBossName("Franzok", 1155, 1), 1155 },
+		{ WHIT..INDENT..getBossName("Hans'gar", 1155, 2), 1155 },
+		{ WHIT.." 8) "..getBossName("Kromog", 1162), 1162 },
+		{ WHIT.." 9) "..getBossName("The Iron Maidens", 1203), 1203 },
+		{ WHIT..INDENT..getBossName("Admiral Gar'an", 1203, 1), 1203 },
+		{ WHIT..INDENT..getBossName("Enforcer Sorka", 1203, 2), 1203 },
+		{ WHIT..INDENT..getBossName("Marak the Blooded", 1203, 3), 1203 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Black Forge", "ac=8990" },
 		{ "Iron Assembly", "ac=8991" },
 		{ "The Steel Has Been Brought", "ac=8929" },
@@ -178,17 +200,17 @@ db.AtlasMaps = {
 		DungeonHeroicID = 859,
 		DungeonMythicID = 1005,
 		Acronym = L["BSM"],
-		WorldMapID = 596,
+		WorldMapID = 573,
 		JournalInstanceID = 385,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Magmolatus", 893), 893 },
-		{ WHIT..INDENT..Atlas_GetBossName("Forgemaster Gog'duh", 893, 1), 893 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Slave Watcher Crushto", 888), 888 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Roltall", 887), 887 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Gug'rokk", 889), 889 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ WHIT.." 1) "..getBossName("Magmolatus", 893), 893 },
+		{ WHIT..INDENT..getBossName("Forgemaster Gog'duh", 893, 1), 893 },
+		{ WHIT.." 2) "..getBossName("Slave Watcher Crushto", 888), 888 },
+		{ WHIT.." 3) "..getBossName("Roltall", 887), 887 },
+		{ WHIT.." 4) "..getBossName("Gug'rokk", 889), 889 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "A Gift of Earth and Fire", "ac=8993" },
 		{ "Come With Me If You Want to Live", "ac=9005" },
 		{ "Is Draenor on Fire?", "ac=9008" },
@@ -213,17 +235,17 @@ db.AtlasMaps = {
 		JournalInstanceID = 556,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "TheEverbloomB",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Witherbark", 1214), 1214 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Ancient Protectors", 1207), 1207 },
-		{ WHIT..INDENT..Atlas_GetBossName("Dulhu", 1207, 1), 1207 },
-		{ WHIT..INDENT..Atlas_GetBossName("Earthshaper Telu", 1207, 2), 1207 },
-		{ WHIT..INDENT..Atlas_GetBossName("Life Warden Gola", 1207, 3), 1207 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Archmage Sol", 1208), 1208 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Xeri'tac", 1209)..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"], 1209 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B) "..CONNECTION.. L_PAREN..ALC["Portal"]..R_PAREN, 10002 },
+		{ WHIT.." 1) "..getBossName("Witherbark", 1214), 1214 },
+		{ WHIT.." 2) "..getBossName("Ancient Protectors", 1207), 1207 },
+		{ WHIT..INDENT..getBossName("Dulhu", 1207, 1), 1207 },
+		{ WHIT..INDENT..getBossName("Earthshaper Telu", 1207, 2), 1207 },
+		{ WHIT..INDENT..getBossName("Life Warden Gola", 1207, 3), 1207 },
+		{ WHIT.." 3) "..getBossName("Archmage Sol", 1208), 1208 },
+		{ WHIT.." 4) "..getBossName("Xeri'tac", 1209)..L_PAREN..ALC["Lower"]..R_PAREN, 1209 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Water Management", "ac=9017" },
 		{ "The Everbloom", "ac=9044" },
 		{ "Heroic: The Everbloom", "ac=9053" },
@@ -246,10 +268,10 @@ db.AtlasMaps = {
 		JournalInstanceID = 556,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "TheEverbloomA",
-		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10001 },
-		{ WHIT.." 5) "..Atlas_GetBossName("Yalnu", 1210), 1210 },
+		{ BLUE.." B) "..CONNECTION.. L_PAREN..ALC["Portal"]..R_PAREN, 10001 },
+		{ WHIT.." 5) "..getBossName("Yalnu", 1210), 1210 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "The Everbloom", "ac=9044" },
 		{ "Heroic: The Everbloom", "ac=9053" },
 		{ "Heroic: The Everbloom Guild Run", "ac=9374" },
@@ -269,16 +291,16 @@ db.AtlasMaps = {
 		WorldMapID = 606,
 		JournalInstanceID = 536,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B) "..L["Train Ride"]..ALC["L-Parenthesis"]..ALC["Event"]..ALC["R-Parenthesis"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Rocketspark and Borka", 1138), 1138 },
-		{ WHIT..INDENT..Atlas_GetBossName("Borka the Brute", 1138, 2), 1138 },
-		{ WHIT..INDENT..Atlas_GetBossName("Railmaster Rocketspark", 1138, 1), 1138 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Nitrogg Thundertower", 1163), 1163 },
-		{ WHIT..INDENT..Atlas_GetBossName("Assault Cannon", 1163, 2), 1163 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Skylord Tovra", 1133), 1133 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B) "..L["Train Ride"]..L_PAREN..ALC["Event"]..R_PAREN, 10002 },
+		{ WHIT.." 1) "..getBossName("Rocketspark and Borka", 1138), 1138 },
+		{ WHIT..INDENT..getBossName("Borka the Brute", 1138, 2), 1138 },
+		{ WHIT..INDENT..getBossName("Railmaster Rocketspark", 1138, 1), 1138 },
+		{ WHIT.." 2) "..getBossName("Nitrogg Thundertower", 1163), 1163 },
+		{ WHIT..INDENT..getBossName("Assault Cannon", 1163, 2), 1163 },
+		{ WHIT.." 3) "..getBossName("Skylord Tovra", 1133), 1133 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "No Ticket", "ac=9007" },
 		{ "This Is Why We Can't Have Nice Things", "ac=9024" },
 		{ "Grimrail Depot", "ac=9043" },
@@ -303,14 +325,14 @@ db.AtlasMaps = {
 		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "HellfireB",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B) "..ALC["Connection"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Hellfire Assault", 1426), 1426 },			-- 1
-		{ WHIT..INDENT..Atlas_GetBossName("Siegemaster Mar'tak", 1426, 1), 1426 },
-		{ WHIT..INDENT..Atlas_GetBossName("Hellfire Cannon", 1426, 2), 1426 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Iron Reaver", 1425), 1425 },			-- 2
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B) "..CONNECTION, 10002 },
+		{ WHIT.." 1) "..getBossName("Hellfire Assault", 1426), 1426 },			-- 1
+		{ WHIT..INDENT..getBossName("Siegemaster Mar'tak", 1426, 1), 1426 },
+		{ WHIT..INDENT..getBossName("Hellfire Cannon", 1426, 2), 1426 },
+		{ WHIT.." 2) "..getBossName("Iron Reaver", 1425), 1425 },			-- 2
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Hellbreach", "ac=10023" },
 		{ "Nearly Indestructible", "ac=10026" },
 		{ "Turning the Tide", "ac=10057" },
@@ -329,15 +351,15 @@ db.AtlasMaps = {
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireA",
 		NextMap = "HellfireC",
-		{ BLUE.." B/C) "..ALC["Connection"], 10001 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Gorefiend", 1372), 1372 },				-- 3
-		{ WHIT.." 4) "..Atlas_GetBossName("Kilrogg Deadeye", 1396), 1396 },			-- 4
-		{ WHIT.." 5) "..Atlas_GetBossName("Hellfire High Council", 1432), 1432 },		-- 5
-		{ WHIT..INDENT..Atlas_GetBossName("Dia Darkwhisper", 1432, 3), 1432 },
-		{ WHIT..INDENT..Atlas_GetBossName("Gurtogg Bloodboil", 1432, 1), 1432 },
-		{ WHIT..INDENT..Atlas_GetBossName("Blademaster Jubei'thos", 1432, 2), 1432 },
+		{ BLUE.." B/C) "..CONNECTION, 10001 },
+		{ WHIT.." 3) "..getBossName("Gorefiend", 1372), 1372 },				-- 3
+		{ WHIT.." 4) "..getBossName("Kilrogg Deadeye", 1396), 1396 },			-- 4
+		{ WHIT.." 5) "..getBossName("Hellfire High Council", 1432), 1432 },		-- 5
+		{ WHIT..INDENT..getBossName("Dia Darkwhisper", 1432, 3), 1432 },
+		{ WHIT..INDENT..getBossName("Gurtogg Bloodboil", 1432, 1), 1432 },
+		{ WHIT..INDENT..getBossName("Blademaster Jubei'thos", 1432, 2), 1432 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Halls of Blood", "ac=10024" },
 		{ "A Race Against Slime", "ac=9972" },
 		{ "Get In My Belly!", "ac=9979" },
@@ -356,10 +378,10 @@ db.AtlasMaps = {
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireB",
 		NextMap = "HellfireD",
-		{ BLUE.." C) "..ALC["Connection"], 10001 },
-		{ WHIT.." 6) "..Atlas_GetBossName("Kormrok", 1392), 1392 },				-- 6
+		{ BLUE.." C) "..CONNECTION, 10001 },
+		{ WHIT.." 6) "..getBossName("Kormrok", 1392), 1392 },				-- 6
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Hellbreach", "ac=10023" },
 		{ "Waves Came Crashing Down All Around", "ac=10013" },
 	},
@@ -377,18 +399,18 @@ db.AtlasMaps = {
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireC",
 		NextMap = "HellfireE",
-		{ BLUE.." B/C) "..ALC["Connection"], 10001 },
-		{ WHIT.." 7) "..Atlas_GetBossName("Shadow-Lord Iskar", 1433), 1433 },			-- 7
-		{ WHIT..INDENT..Atlas_GetBossName("Fel Raven", 1433, 2), 1433 },
-		{ WHIT..INDENT..Atlas_GetBossName("Shadowfel Warden", 1433, 3), 1433 },
-		{ WHIT..INDENT..Atlas_GetBossName("Corrupted PRIEST of Terokk", 1433, 4), 1433 },
-		{ WHIT..INDENT..Atlas_GetBossName("Illusionary Outcast", 1433, 5), 1433 },
-		{ WHIT.." 8) "..Atlas_GetBossName("Fel Lord Zakuun", 1391), 1391 },			-- 8
-		{ WHIT.." 9) "..Atlas_GetBossName("Xhul'horac", 1447), 1447 },				-- 9
-		{ WHIT.."10) "..Atlas_GetBossName("Socrethar the Eternal", 1427), 1427 },		-- 10
-		{ WHIT.."11) "..Atlas_GetBossName("Tyrant Velhari", 1394), 1394 },			-- 11
+		{ BLUE.." B/C) "..CONNECTION, 10001 },
+		{ WHIT.." 7) "..getBossName("Shadow-Lord Iskar", 1433), 1433 },			-- 7
+		{ WHIT..INDENT..getBossName("Fel Raven", 1433, 2), 1433 },
+		{ WHIT..INDENT..getBossName("Shadowfel Warden", 1433, 3), 1433 },
+		{ WHIT..INDENT..getBossName("Corrupted PRIEST of Terokk", 1433, 4), 1433 },
+		{ WHIT..INDENT..getBossName("Illusionary Outcast", 1433, 5), 1433 },
+		{ WHIT.." 8) "..getBossName("Fel Lord Zakuun", 1391), 1391 },			-- 8
+		{ WHIT.." 9) "..getBossName("Xhul'horac", 1447), 1447 },				-- 9
+		{ WHIT.."10) "..getBossName("Socrethar the Eternal", 1427), 1427 },		-- 10
+		{ WHIT.."11) "..getBossName("Tyrant Velhari", 1394), 1394 },			-- 11
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Bastion of Shadows", "ac=10025" },
 		{ "Destructor's Rise", "ac=10020" },
 		{ "Pro Toss", "ac=9988" },
@@ -411,9 +433,9 @@ db.AtlasMaps = {
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireD",
 		NextMap = "HellfireF",
-		{ WHIT.."12) "..Atlas_GetBossName("Mannoroth", 1395), 1395 },				-- 12
+		{ WHIT.."12) "..getBossName("Mannoroth", 1395), 1395 },				-- 12
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Destructor's Rise", "ac=10020" },
 		{ "Bad Manner(oth)", "ac=10030" },
 	},
@@ -430,15 +452,16 @@ db.AtlasMaps = {
 		JournalInstanceID = 669,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HellfireE",
-		{ BLUE.." D) "..ALC["Connection"], 10001 },
-		{ WHIT.."13) "..Atlas_GetBossName("Archimonde", 1438), 1438 },			-- 13 
+		{ BLUE.." D) "..CONNECTION, 10001 },
+		{ WHIT.."13) "..getBossName("Archimonde", 1438), 1438 },			-- 13 
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "The Black Gate", "ac=10019" },
 		{ "Echoes of Doomfire", "ac=10073" },
 		{ "Time is a Flat Circle", "ac=9680" },
 		{ "Ahead of the Curve: The Black Gate", "ac=10044" },
-		{ "Cutting Edge: The Black Gate", "ac=10045" },	},
+		{ "Cutting Edge: The Black Gate", "ac=10045" },
+	},
 	HighmaulA = {
 		ZoneName = { BZ["Highmaul"]..ALC["MapA"] },
 		Location = { BZ["Nagrand"] },
@@ -452,15 +475,15 @@ db.AtlasMaps = {
 		JournalInstanceID = 477,
 		Module = "Atlas_WarlordsofDraenor",
 		NextMap = "HighmaulB",
-		{ BLUE.." A) "..ALC["Entrance"]..ALC["L-Parenthesis"]..ALC["Lower"]..ALC["R-Parenthesis"], 10001 },
-		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Kargath Bladefist", 1128), 1128 },
-		{ WHIT.." 2) "..Atlas_GetBossName("The Butcher", 971), 971 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Tectus", 1195), 1195 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Brackenspore", 1196), 1196 },
-		{ WHIT..INDENT..Atlas_GetBossName("Fungal Flesh-Eater", 1196, 2), 1196 },
+		{ BLUE.." A) "..ENTRANCE..L_PAREN..ALC["Lower"]..R_PAREN, 10001 },
+		{ BLUE.." B) "..CONNECTION.. L_PAREN..ALC["Portal"]..R_PAREN, 10002 },
+		{ WHIT.." 1) "..getBossName("Kargath Bladefist", 1128), 1128 },
+		{ WHIT.." 2) "..getBossName("The Butcher", 971), 971 },
+		{ WHIT.." 3) "..getBossName("Tectus", 1195), 1195 },
+		{ WHIT.." 4) "..getBossName("Brackenspore", 1196), 1196 },
+		{ WHIT..INDENT..getBossName("Fungal Flesh-Eater", 1196, 2), 1196 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Flame On!", "ac=8948" },
 		{ "Hurry Up, Maggot!", "ac=8947" },
 		{ "More Like Wrecked-us", "ac=8974" },
@@ -483,14 +506,14 @@ db.AtlasMaps = {
 		JournalInstanceID = 477,
 		Module = "Atlas_WarlordsofDraenor",
 		PrevMap = "HighmaulA",
-		{ BLUE.." B-D) "..ALC["Connection"], 10001 },
-		{ WHIT.." 5) "..Atlas_GetBossName("Twin Ogron", 1148), 1148 },
-		{ WHIT..INDENT..Atlas_GetBossName("Phemos", 1148, 2), 1148 },
-		{ WHIT..INDENT..Atlas_GetBossName("Pol", 1148, 1), 1148 },
-		{ WHIT.." 6) "..Atlas_GetBossName("Ko'ragh", 1153), 1153 },
-		{ WHIT.." 7) "..Atlas_GetBossName("Imperator Mar'gok", 1197), 1197 },
+		{ BLUE.." B-D) "..CONNECTION, 10001 },
+		{ WHIT.." 5) "..getBossName("Twin Ogron", 1148), 1148 },
+		{ WHIT..INDENT..getBossName("Phemos", 1148, 2), 1148 },
+		{ WHIT..INDENT..getBossName("Pol", 1148, 1), 1148 },
+		{ WHIT.." 6) "..getBossName("Ko'ragh", 1153), 1153 },
+		{ WHIT.." 7) "..getBossName("Imperator Mar'gok", 1197), 1197 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Brothers in Arms", "ac=8958" },
 		{ "Pair Annihilation", "ac=8976" },
 		{ "Lineage of Power", "ac=8977" },
@@ -509,19 +532,19 @@ db.AtlasMaps = {
 		WorldMapID = 595,
 		JournalInstanceID = 558,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Fleshrender Nok'gar", 1235), 1235 },
-		{ WHIT..INDENT..Atlas_GetBossName("Dreadfang", 1235, 2), 1235 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Grimrail Enforcers", 1236), 1236 },
-		{ WHIT..INDENT..Atlas_GetBossName("Ahri'ok Dugru", 1236, 1), 1236 },
-		{ WHIT..INDENT..Atlas_GetBossName("Makogg Emberblade", 1236, 2), 1236 },
-		{ WHIT..INDENT..Atlas_GetBossName("Nesa \"Hightower\" Nox", 1236, 3), 1236 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Oshir", 1237), 1237 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Skulloc", 1238), 1238 },
-		{ WHIT..INDENT..Atlas_GetBossName("Koramar", 1238, 3), 1238 },
-		{ WHIT..INDENT..Atlas_GetBossName("Zoggosh", 1238, 2), 1238 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ WHIT.." 1) "..getBossName("Fleshrender Nok'gar", 1235), 1235 },
+		{ WHIT..INDENT..getBossName("Dreadfang", 1235, 2), 1235 },
+		{ WHIT.." 2) "..getBossName("Grimrail Enforcers", 1236), 1236 },
+		{ WHIT..INDENT..getBossName("Ahri'ok Dugru", 1236, 1), 1236 },
+		{ WHIT..INDENT..getBossName("Makogg Emberblade", 1236, 2), 1236 },
+		{ WHIT..INDENT..getBossName("Nesa \"Hightower\" Nox", 1236, 3), 1236 },
+		{ WHIT.." 3) "..getBossName("Oshir", 1237), 1237 },
+		{ WHIT.." 4) "..getBossName("Skulloc", 1238), 1238 },
+		{ WHIT..INDENT..getBossName("Koramar", 1238, 3), 1238 },
+		{ WHIT..INDENT..getBossName("Zoggosh", 1238, 2), 1238 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Militaristic, Expansionist", "ac=9083" },
 		{ "Expert Timing", "ac=9081" },
 		{ "Take Cover!", "ac=9082" },
@@ -543,16 +566,16 @@ db.AtlasMaps = {
 		WorldMapID = 574,
 		JournalInstanceID = 537,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B) "..ALC["Connection"].. ALC["L-Parenthesis"]..ALC["Portal"]..ALC["R-Parenthesis"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Sadana Bloodfury", 1139), 1139 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Nhallish", 1168), 1168 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Bonemaw", 1140), 1140 },
-		{ WHIT..INDENT..Atlas_GetBossName("Carrion Worm", 1140, 2), 1140 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Ner'zhul", 1160), 1160 },
-		{ WHIT..INDENT..Atlas_GetBossName("Ritual of Bones", 1160, 2), 1160 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B) "..CONNECTION.. L_PAREN..ALC["Portal"]..R_PAREN, 10002 },
+		{ WHIT.." 1) "..getBossName("Sadana Bloodfury", 1139), 1139 },
+		{ WHIT.." 2) "..getBossName("Nhallish", 1168), 1168 },
+		{ WHIT.." 3) "..getBossName("Bonemaw", 1140), 1140 },
+		{ WHIT..INDENT..getBossName("Carrion Worm", 1140, 2), 1140 },
+		{ WHIT.." 4) "..getBossName("Ner'zhul", 1160), 1160 },
+		{ WHIT..INDENT..getBossName("Ritual of Bones", 1160, 2), 1160 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "What's Your Sign?", "ac=9018" },
 		{ "Icky Ichors", "ac=9025" },
 		{ "Souls of the Lost", "ac=9026" },
@@ -575,17 +598,17 @@ db.AtlasMaps = {
 		WorldMapID = 601,
 		JournalInstanceID = 476,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Ranjit", 965), 965 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Araknath", 966), 966 },
-		{ WHIT..INDENT..Atlas_GetBossName("Arakkoa Sun Construct Prototype", 966, 2), 966 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Rukhran", 967), 967 },
-		{ WHIT..INDENT..Atlas_GetBossName("Solar Flare", 967, 2), 967 },
-		{ WHIT.." 4) "..Atlas_GetBossName("High Sage Viryx", 968)..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 968 },
-		{ WHIT..INDENT..Atlas_GetBossName("Arakkoa Shield Construct", 968, 3), 968 },
-		{ WHIT..INDENT..Atlas_GetBossName("Arakkoa Solar Zealot", 968, 2), 968 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ WHIT.." 1) "..getBossName("Ranjit", 965), 965 },
+		{ WHIT.." 2) "..getBossName("Araknath", 966), 966 },
+		{ WHIT..INDENT..getBossName("Arakkoa Sun Construct Prototype", 966, 2), 966 },
+		{ WHIT.." 3) "..getBossName("Rukhran", 967), 967 },
+		{ WHIT..INDENT..getBossName("Solar Flare", 967, 2), 967 },
+		{ WHIT.." 4) "..getBossName("High Sage Viryx", 968)..L_PAREN..UPPER..R_PAREN, 968 },
+		{ WHIT..INDENT..getBossName("Arakkoa Shield Construct", 968, 3), 968 },
+		{ WHIT..INDENT..getBossName("Arakkoa Solar Zealot", 968, 2), 968 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Ready for Raiding IV", "ac=9033" },
 		{ "Magnify... Enhance", "ac=9034" },
 		{ "I Saw Solis", "ac=9035" },
@@ -600,8 +623,8 @@ db.AtlasMaps = {
 		{ "Skyreach: Gold", "ac=8874" },
 	},
 	BlackrockMountainEnt = {
-		ZoneName = { BZ["Blackrock Mountain"]..ALC["L-Parenthesis"]..ALC["Entrance"]..ALC["R-Parenthesis"] },
-		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
+		ZoneName = { BZ["Blackrock Mountain"]..L_PAREN..ENTRANCE..R_PAREN },
+		Location = { BZ["Searing Gorge"]..SLASH..BZ["Burning Steppes"] },
 		LevelRange = "49-100+",
 		MinLevel = "47",
 		PlayerLimit = { 5, 10, 25, 40 },
@@ -612,21 +635,21 @@ db.AtlasMaps = {
 		{ BLUE.." C) "..BZ["Blackrock Depths"], 10003 },
 		{ BLUE.." D) "..BZ["Lower Blackrock Spire"], 10004 },
 		{ BLUE..INDENT..BZ["Upper Blackrock Spire"] },
-		{ GREN..INDENT..L["Bodley"]..ALC["L-Parenthesis"]..L["Ghost"]..ALC["R-Parenthesis"] },
+		{ GREN..INDENT..L["Bodley"]..L_PAREN..L["Ghost"]..R_PAREN },
 		{ BLUE.." E) "..BZ["The Molten Core"], 10005 },
 		{ GREN..INDENT..L["Lothos Riftwaker"] },
 		{ BLUE.." F) "..BZ["Blackwing Lair"], 10006 },
 		{ GREN..INDENT..L["Orb of Command"] },
 		{ BLUE.." G) "..BZ["Blackrock Caverns"], 10007 },
-		{ ORNG.." 1) "..L["Scarshield Quartermaster <Scarshield Legion>"]..ALC["L-Parenthesis"]..ALC["Upper"]..ALC["R-Parenthesis"], 10008 },
-		{ ORNG.." 2) "..L["The Behemoth"]..ALC["L-Parenthesis"]..ALC["Rare"]..ALC["Comma"]..ALC["Wanders"]..ALC["R-Parenthesis"], 10009 },
-		{ ORNG.." 3) "..Atlas:GetBossName("Overmaster Pyron")..ALC["L-Parenthesis"]..ALC["Wanders"]..ALC["R-Parenthesis"], 10010 },
-		{ GREN.." 1') "..L["Meeting Stone"]..ALC["L-Parenthesis"]..BZ["Blackrock Depths"]..ALC["R-Parenthesis"], 10011 },
-		{ GREN.." 2') "..L["Meeting Stone"]..ALC["L-Parenthesis"]..BZ["Lower Blackrock Spire"]..ALC["Comma"]..BZ["Upper Blackrock Spire"]..ALC["R-Parenthesis"], 10012 },
+		{ ORNG.." 1) "..L["Scarshield Quartermaster <Scarshield Legion>"]..L_PAREN..UPPER..R_PAREN, 10008 },
+		{ ORNG.." 2) "..L["The Behemoth"]..L_PAREN..RARE..COMMA..WANDERS..R_PAREN, 10009 },
+		{ ORNG.." 3) "..Atlas:GetBossName("Overmaster Pyron")..L_PAREN..WANDERS..R_PAREN, 10010 },
+		{ GREN.." 1') "..L["Meeting Stone"]..L_PAREN..BZ["Blackrock Depths"]..R_PAREN, 10011 },
+		{ GREN.." 2') "..L["Meeting Stone"]..L_PAREN..BZ["Lower Blackrock Spire"]..COMMA..BZ["Upper Blackrock Spire"]..R_PAREN, 10012 },
 	},
 	UpperBlackrockSpire = {
-		ZoneName = { BZ["Blackrock Mountain"]..ALC["Colon"]..BZ["Upper Blackrock Spire"] },
-		Location = { BZ["Searing Gorge"]..ALC["Slash"]..BZ["Burning Steppes"] },
+		ZoneName = { BZ["Blackrock Mountain"]..COLON..BZ["Upper Blackrock Spire"] },
+		Location = { BZ["Searing Gorge"]..SLASH..BZ["Burning Steppes"] },
 		DungeonID = 828,
 		DungeonHeroicID = 860,
 		DungeonMythicID = 1004,
@@ -634,19 +657,19 @@ db.AtlasMaps = {
 		WorldMapID = 616,
 		JournalInstanceID = 559,
 		Module = "Atlas_WarlordsofDraenor",
-		{ BLUE.." A) "..ALC["Entrance"], 10001 },
-		{ BLUE.." B-C) "..ALC["Connection"], 10002 },
-		{ WHIT.." 1) "..Atlas_GetBossName("Orebender Gor'ashan", 1226), 1226 },
-		{ WHIT.." 2) "..Atlas_GetBossName("Kyrak", 1227), 1227 },
-		{ WHIT..INDENT..Atlas_GetBossName("Drakonid Monstrosity", 1227, 2), 1227 },
-		{ WHIT.." 3) "..Atlas_GetBossName("Commander Tharbek", 1228), 1228 },
-		{ WHIT..INDENT..Atlas_GetBossName("Black Iron Guard", 1228, 3), 1228 },
-		{ WHIT..INDENT..Atlas_GetBossName("Ironbarb Skyreaver", 1228, 2), 1228 },
-		{ WHIT.." 4) "..Atlas_GetBossName("Ragewing the Untamed", 1229), 1229 },
-		{ WHIT..INDENT..Atlas_GetBossName("Ragewind Whelp", 1229, 2), 1229 },
-		{ WHIT.." 5) "..Atlas_GetBossName("Warlord Zaela", 1234), 1234 },
+		{ BLUE.." A) "..ENTRANCE, 10001 },
+		{ BLUE.." B-C) "..CONNECTION, 10002 },
+		{ WHIT.." 1) "..getBossName("Orebender Gor'ashan", 1226), 1226 },
+		{ WHIT.." 2) "..getBossName("Kyrak", 1227), 1227 },
+		{ WHIT..INDENT..getBossName("Drakonid Monstrosity", 1227, 2), 1227 },
+		{ WHIT.." 3) "..getBossName("Commander Tharbek", 1228), 1228 },
+		{ WHIT..INDENT..getBossName("Black Iron Guard", 1228, 3), 1228 },
+		{ WHIT..INDENT..getBossName("Ironbarb Skyreaver", 1228, 2), 1228 },
+		{ WHIT.." 4) "..getBossName("Ragewing the Untamed", 1229), 1229 },
+		{ WHIT..INDENT..getBossName("Ragewind Whelp", 1229, 2), 1229 },
+		{ WHIT.." 5) "..getBossName("Warlord Zaela", 1234), 1234 },
 		{ "" },
-		{ LBLU..ACHIEVEMENTS..ALC["Colon"] },
+		{ LBLU..ACHIEVEMENTS..COLON },
 		{ "Magnets, How Do They Work?", "ac=9045" },
 		{ "Leeeeeeeeeeeeeroy...?", "ac=9058" },
 		{ "Bridge Over Troubled Fire", "ac=9056" },
@@ -709,8 +732,8 @@ db.AtlasMaps_NPC_DB = {
 		{ "B", 10002, 142, 183}, 
 	},
 	TheEverbloomB = {
-		{ 5, 1210, 225, 356 }, -- Yalnu
-		{ "B", 10001, 235, 429},
+        { "B", 10001, 248, 419 }, -- blue
+        { "5", 1210, 249, 378 }, -- white
 	},
 	GrimrailDepot = {
 		{ 1, 1138, 413, 207 }, -- Rocketspark and Borka

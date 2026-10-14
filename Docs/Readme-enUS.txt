@@ -1,7 +1,7 @@
 Atlas, a World of Warcraft instance map browser
 Copyright 2005 ~ 2010 - Dan Gilbert <dan.b.gilbert@gmail.com>
 Copyright 2010 - Lothaer <lothayer@gmail.com>, Atlas Team
-Copyright 2011 ~ 2015 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
+Copyright 2011 ~ 2026 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 
 
 =====================
@@ -62,4 +62,4 @@ donation, you are welcome to do so.
 You can also distribute this addon but only with no charge to your users. 
 If you are going to include part of the codes, graphics, or any file(s) from 
 this addon in your own product(s), please write us an email to inform us, and 
-please also to include our team members¡¦ name as part of your product credits.
+please also to include our team membersï¿½ï¿½ name as part of your product credits.
