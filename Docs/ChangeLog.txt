@@ -5,6 +5,10 @@ Copyright 2011 ~ 2026 - Arith Hsu, Atlas Team <atlas.addon at gmail dot com>
 = Change Log =
 ==============
 
+v1.54.00 (Oct. 15, 2026)
+------------------------
+- ToC update to support WoW 12.1.5
+
 v1.53.01 (Oct. 14, 2023)
 ------------------------
 - Migrate from CurseForge SVN to GitHub
