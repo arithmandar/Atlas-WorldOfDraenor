@@ -1,8 +1,8 @@
 package-as: Atlas_WarlordsofDraenor
 
 manual-changelog:
-    filename: Docs/ChangeLog.txt
-    markup-type: plain
+    filename: Docs/ChangeLog.md
+    markup-type: markdown
     
 enable-nolib-creation: no
 
@@ -11,4 +11,4 @@ wowi-archive-previous: yes
 wowi-create-changelog: no
 
 ignore:
-    - Images\PSD
+    - Images/PSD
