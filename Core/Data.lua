@@ -622,6 +622,7 @@ db.AtlasMaps = {
 		{ "Skyreach: Silver", "ac=8873" },
 		{ "Skyreach: Gold", "ac=8874" },
 	},
+	--[[
 	BlackrockMountainEnt = {
 		ZoneName = { BZ["Blackrock Mountain"]..L_PAREN..ENTRANCE..R_PAREN },
 		Location = { BZ["Searing Gorge"]..SLASH..BZ["Burning Steppes"] },
@@ -683,6 +684,7 @@ db.AtlasMaps = {
 		{ "Upper Blackrock Spire: Silver", "ac=8893" },
 		{ "Upper Blackrock Spire: Gold", "ac=8894" },
 	},
+	]]
 }
 
 -- Atlas Map NPC Description Data
@@ -817,6 +819,7 @@ db.AtlasMaps_NPC_DB = {
 		{ 4, 968, 275, 214 }, -- High Sage Viryx
 		{ "A", 10001, 303, 107},
 	},
+	--[[
 	BlackrockMountainEnt = {
 		{ "A", 10001, 271, 182 },
 		{ "B", 10002, 255, 498},
@@ -843,6 +846,7 @@ db.AtlasMaps_NPC_DB = {
 		{ "C", 10002, 192, 164},
 		{ "C", 10002, 225, 313},
 	},
+	]]
 }
 
 --[[
@@ -859,7 +863,7 @@ db.AtlasMaps_NPC_DB = {
 	The table value is map's key-name.
 ]]
 db.AssocDefaults = {
-	[BZ["Blackrock Mountain"]] =		"BlackrockMountainEnt",
+	--[BZ["Blackrock Mountain"]] =		"BlackrockMountainEnt",
 	[BZ["Blackrock Foundry"]] =		"BlackrockFoundryA",	-- WoD
 	[BZ["Hellfire Citadel"]] =		"HellfireA",		-- WoD
 	[BZ["Highmaul"]] =			"HighmaulA",		-- WoD
@@ -1014,12 +1018,12 @@ db.OutdoorZoneToAtlas = {
 -- Yes, the following two tables are redundant, but they're both here in case there's ever more than one entrance map for an instance
 -- Entrance maps to instance maps
 db.EntToInstMatches = {
-	["BlackrockMountainEnt"] = 		{"UpperBlackrockSpire"},
+	--["BlackrockMountainEnt"] = 		{"UpperBlackrockSpire"},
 }
 
 -- Instance maps to entrance maps
 db.InstToEntMatches = {
-	["UpperBlackrockSpire"] =		{"BlackrockMountainEnt"},
+	--["UpperBlackrockSpire"] =		{"BlackrockMountainEnt"},
 }
 
 -- Defines the instance which have multiple maps
@@ -1070,8 +1074,8 @@ db.DropDownLayouts_Order = {
 db.DropDownLayouts = {
 	[ATLAS_DDL_CONTINENT] = {
 		[ATLAS_DDL_CONTINENT_EASTERN] = {
-			"BlackrockMountainEnt",		-- Classic WoW, Catalysm, Draenor
-			"UpperBlackrockSpire",		-- Draenor
+			--"BlackrockMountainEnt",		-- Classic WoW, Catalysm, Draenor
+			--"UpperBlackrockSpire",		-- Draenor
 		},
 		[ATLAS_DDL_CONTINENT_DRAENOR] = {
 			"Auchindoun",
@@ -1114,8 +1118,8 @@ db.DropDownLayouts = {
 			"IronDocks",
 			"ShadowmoonBurialGrounds",
 			"Skyreach",
-			"BlackrockMountainEnt",
-			"UpperBlackrockSpire",
+			--"BlackrockMountainEnt",
+			--"UpperBlackrockSpire",
 		},
 	},
 	[ATLAS_DDL_LEVEL] = {
@@ -1146,8 +1150,8 @@ db.DropDownLayouts = {
 		[ATLAS_DDL_PARTYSIZE_5] = {
 			"Auchindoun",			-- Draenor
 			"BloodmaulSlagMines",		-- Draenor
-			"BlackrockMountainEnt",		-- Draenor
-			"UpperBlackrockSpire",		-- Draenor
+			--"BlackrockMountainEnt",		-- Draenor
+			--"UpperBlackrockSpire",		-- Draenor
 			"TheEverbloomA",		-- Draenor
 			"TheEverbloomB",		-- Draenor
 			"GrimrailDepot",		-- Draenor
@@ -1188,7 +1192,7 @@ db.DropDownLayouts = {
 			"BlackrockFoundryA",		-- Draenor
 			"BlackrockFoundryB",		-- Draenor
 			"BloodmaulSlagMines",		-- Draenor
-			"UpperBlackrockSpire",		-- Draenor
+			--"UpperBlackrockSpire",		-- Draenor
 			"TheEverbloomA",		-- Draenor
 			"TheEverbloomB",		-- Draenor
 			"GrimrailDepot",		-- Draenor
@@ -1205,7 +1209,7 @@ db.DropDownLayouts = {
 			"Skyreach",			-- Draenor
 		},
 		[ATLAS_DDL_TYPE_ENTRANCE] = {
-			"BlackrockMountainEnt",		-- Draenor
+			--"BlackrockMountainEnt",		-- Draenor
 		},
 	},
 }
